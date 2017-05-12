@@ -8,7 +8,26 @@ public class Grid : MonoBehaviour
 	{
 		public int x;
 		public int y;
-		public Vector3 ToWorldPosition( Vector2 spacing, float height )
+        public Position (int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public override bool Equals(object pos)
+        {
+            if (!(pos is Grid.Position))
+            {
+                return false;
+            }
+            Grid.Position position = (Grid.Position)pos;
+            return (position.x == this.x && position.y == this.y);
+        }
+
+        public override int GetHashCode()
+        {
+            return x + 1000 * y;
+        }
+        public Vector3 ToWorldPosition( Vector2 spacing, float height )
 		{
 			return new Vector3( x * spacing.x, height, y * spacing.y );
 		}
@@ -39,10 +58,10 @@ public class Grid : MonoBehaviour
 
         foreach (Position position in path)
         {
-            //Debug.Log(position.x + " " + position.y);
             tiles[position.x, position.y].Highlight(true);
+            Debug.Log("ACHEI");
         }
-        StartCoroutine(player.SetPosition(path, tileSpacing));
+        player.SetPosition(targetPosition, tileSpacing);
 	}
 
 	private void Start()
