@@ -22,11 +22,6 @@ public class Grid : MonoBehaviour
             Grid.Position position = (Grid.Position)pos;
             return (position.x == this.x && position.y == this.y);
         }
-
-        public override int GetHashCode()
-        {
-            return x + 1000 * y;
-        }
         public Vector3 ToWorldPosition( Vector2 spacing, float height )
 		{
 			return new Vector3( x * spacing.x, height, y * spacing.y );
@@ -59,7 +54,6 @@ public class Grid : MonoBehaviour
         foreach (Position position in path)
         {
             tiles[position.x, position.y].Highlight(true);
-            Debug.Log("ACHEI");
         }
         player.SetPosition(targetPosition, tileSpacing);
 	}
