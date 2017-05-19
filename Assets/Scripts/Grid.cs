@@ -49,13 +49,13 @@ public class Grid : MonoBehaviour
 		foreach( Tile tile in tiles )
 			tile.Highlight( false );
 
-		List<Position> path = PathFinder.FindPath( tiles, player.position, targetPosition );
+		List<Position> path = PathFinder.FindPath( tiles, player.position ,targetPosition);
 
         foreach (Position position in path)
         {
             tiles[position.x, position.y].Highlight(true);
         }
-        player.SetPosition(targetPosition, tileSpacing);
+        player.goToPosition(path, tileSpacing);
 	}
 
 	private void Start()
